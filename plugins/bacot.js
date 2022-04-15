@@ -19,8 +19,8 @@ ${pickRandom(global.bacot)}
            hydratedFooterText: wm,
            hydratedButtons: [{
              urlButton: {
-               displayText: '📍instagram',
-               url: instagram
+               displayText: 'MY GITHUB',
+               url: github
              }
 
            },
