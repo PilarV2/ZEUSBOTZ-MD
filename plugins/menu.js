@@ -1,6 +1,6 @@
-//UNTUK PENGGUNA WHATSAPP BUSSINES
-//GUNAKAN MENU KE 2 YAH
-//MOHON MAAF SEBELUMNYA
+//By Pilar 
+//Gk Usah Di Hps Ngentod
+//Follow Github Gwhej Asu github.com/PilarV2
 let { default: makeWASocket, BufferJSON, WA_DEFAULT_EPHEMERAL, generateWAMessageFromContent, downloadContentFromMessage, downloadHistory, proto, getMessage, generateWAMessageContent, prepareWAMessageMedia } = require('@adiwajshing/baileys-md')
 wm = global.wm
 let levelling = require('../lib/levelling')
@@ -12,37 +12,57 @@ let { createHash} = require('crypto')
 let fetch = require('node-fetch')
 let { perfomance } = require('perf_hooks')
 let moment = require('moment-timezone')
+let d = new Date(new Date + 3600000)
+let locale = 'id'
+let week = d.toLocaleDateString(locale, { weekday: 'long' })
+let date = d.toLocaleDateString(locale, {
+day: 'numeric',
+month: 'long',
+year: 'numeric'
+})
+
+let time = d.toLocaleTimeString(locale, {
+hour: 'numeric',
+minute: 'numeric',
+second: 'numeric'
+})
+let wktuh = moment.tz('Asia/Jakarta').format('HH')
+let wktum = moment.tz('Asia/Jakarta').format('mm')
+let wktus = moment.tz('Asia/Jakarta').format('ss')
 const defaultMenu = {
   before:`
-╭─⃝▣「 TODAY 」
-│🎐 *Days:* %week %weton
-│🎐 *Date:* %date
-│🎐 *Islamic Date:* %dateIslamic
-│🎐 *Time:* %time
-╰▣──···
-╭─⃝▣ 「 INFO USER 」
-│🎐 Name: %name
-│🎐 Status: --
-│🎐 Limit: %limit
-│🎐 Money: %money
-│🎐 Exp: %totalexp
-│🎐 Level: %level
-│🎐 Role: %role
-╰▣──···
-╭─⃝▣ 「 INFO BOT 」
-│🎐 Mode: ${global.opts['self'] ? 'Self' : 'Publik'}
-│🎐 Memory Used : ${(process.memoryUsage().heapUsed / 1024 / 1024).toFixed(2)}MB
-│🎐 Total Memory: ${Math.round(require('os').totalmem / 1024 / 1024)}MB
-│🎐 Runtime: %uptime ( %muptime )
-│🎐 Version: %version
-│🎐 Database: %rtotalreg dari %totalreg
-╰▣──···
+────━┅ *D A S H B O A R D* ┅━────
+  
+    「 *U S E R* 」
+⟩⟩ *Name:* %name
+⟩⟩︎ *Status:* -
+⟩⟩ *Limit:* %limit
+⟩⟩ *Role:* %role
+⟩⟩ *Level:* %level 
+⟩⟩ *Xp:* %exp / %maxexp
+⟩⟩ *Total Xp:* %totalexp
+
+  「 *T O D A Y* 」
+⟩⟩ *Days:* %week %weton
+⟩⟩ *Date:* %date
+⟩⟩ *Islamic Date:* %dateIslamic
+⟩⟩ *Time:* %time
+
+  「 *I N F O* 」
+⟩⟩ *Bot Name:* ${wm}
+⟩⟩ *Lib*: Baileys-MD
+⟩⟩ *${Object.keys(global.db.data.users).length}* *Pengguna*
+⟩⟩︎ *Prefix:* [. / #]
+⟩⟩ *Uptime:* %uptime ( %muptime )
+⟩⟩ *Mode:* ${global.opts['self'] ? 'Self' : 'publik'}
+⟩⟩ *Database:* %rtotalreg dari %totalreg
+
 ⃝▣「 *I N F O  C M D* 」
 │ *Ⓟ* = Premium
 │ *Ⓛ* = Limit
 ▣──···
   %readmore`.trimStart(), 
-  header: '⃝▣          「 *%category* 」',
+  header: '⃝▣             「 *%category* 」',
  body: '│☂︎ %cmd %isPremium %islimit',
  footer: '▣──···\n',
   after: ``,
@@ -163,6 +183,8 @@ let handler = async (m, { conn, usedPrefix: _p, args, command }) => {
     let user = global.db.data.users[who]
     let { exp, limit, level, money, role } = global.db.data.users[m.sender]
     let { min, xp, max } = levelling.xpRange(level, global.multiplier)
+    let tag = `@${m.sender.split('@')[0]}`
+ m, { contextInfo: { mentionedJid: conn.parseMention(tag) }}
     let name = conn.getName(m.sender)
     let d = new Date(new Date + 3600000)
     let locale = 'id'
@@ -213,12 +235,12 @@ let help = Object.values(global.plugins).filter(plugin => !plugin.disabled).map(
     }
   })
     if (teks == '404') {
-const q = {
+  const q = {
 	"key": {
     "participants":"0@s.whatsapp.net",
 		"remoteJid": "status@broadcast",
 		"fromMe": false,
-		"id": ""
+		"id": "Halo"
 	},
 	"message": {
 		"contactMessage": {
@@ -227,13 +249,22 @@ const q = {
 	},
 	"participant": "0@s.whatsapp.net"
 }
-      const template = generateWAMessageFromContent(m.key.remoteJid, proto.Message.fromObject({
+let menuu = `❏  *I N F O*
+▸ *${ucapan()}*
+▸ *Name:* ${name}
+▸ *Tag:* ${tag}
+▸ *Limit:* ${limit}
+▸ *Role:* ${role}
+▸ *Premium:* ${global.prem ? '✅' : '❌'}
+▸ *Date:* ${week} ${weton} ${date}
+▸ *Time:* ${wib}`
+const template = generateWAMessageFromContent(m.key.remoteJid, proto.Message.fromObject({
         listMessage: {
             title: ``,
-            description: `${ucapan()}\n\n*Silahkan Pilih List Menu*\n*Di Bawah Ya*`,
+            description: menuu,
             buttonText: 'LIST MENU',
             listType: 1,
-            footerText: global.wm,
+            footerText: "Created By Pilar",
             mtype: 'listMessage',
             sections: [
               {
@@ -405,12 +436,12 @@ const q = {
       readmore: readMore
     }
     text = text.replace(new RegExp(`%(${Object.keys(replace).sort((a, b) => b.length - a.length).join`|`})`, 'g'), (_, name) => '' + replace[name])
-    const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
+    let message = await prepareWAMessageMedia({ video: fs.readFileSync('./media/shiro.mp4'), gifPlayback: true }, { upload: conn.waUploadToServer })
+     const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
      templateMessage: {
          hydratedTemplate: {
+           videoMessage: message.videoMessage,
            hydratedContentText: text.trim(),
-           locationMessage: { 
-           jpegThumbnail: fs.readFileSync('./src/welcome.jpg') },
            hydratedFooterText: wm,
            hydratedButtons: [{
             urlButton: {
@@ -420,66 +451,41 @@ const q = {
 
            },
              {
-              quickReplyButton: {
-               displayText: 'Owner',
-               id: '.owner',
+              urlButton: {
+               displayText: 'CHAT OWNER',
+               PhoneNumber: 'https://wa.me/6289625556161'
              }
-
+           },
+  
+           {
+           quickReplyButton: {
+              displayText: 'INFO',
+              id: '.info',
+            }
+            
+          },
+           {
+           quickReplyButton: {
+              displayText: 'SPEED',
+              id: '.speed',
+            }
+      
            },
            {
              quickReplyButton: {
-               displayText: 'Profile',
-               id: '.profile',
+               displayText: 'SCRIPT',
+               id: '.sc',
              }
            }]
          }
        }
      }), { userJid: m.sender, quoted: m });
-     let d1 = 'application/vnd.openxmlformats-officedocument.presentationml.presentation'
-    let d2 = 'application/vnd.openxmlformats-officedocument.wordprocessingml.document'
-    let d3  = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
-    let d4 = 'application/pdf'
-    let d5 = 'text/rtf'
-    let td = `${pickRandom([d1,d2,d3,d4,d5])}`
-    const message = {
-            document: { url: 'https://telegra.ph/file/f3253bf1fbe288cc9ffe2.jpg' },
-            jpegThumbnail: await fs.readFileSync('./src/welcome.jpg'), fileName: 'ZEUS BOT - MD', mimetype: td, fileLength: '99999999999999', pageCount: '999',
-            caption: text,
-            footer: wm,
-            templateButtons: [
-                {
-                    urlButton: {
-                        displayText: 'MY WEBSITE 🌎',
-                        url: 'https://pilarv2.github.io/'
-                    }
-                },
-                {
-                    quickReplyButton: {
-                        displayText: 'Owner',
-                        id: '.owner'
-                    }
-                },
-                {
-                    quickReplyButton: {
-                        displayText: 'Speed',
-                        id: '.ping'
-                    }
-                },
-                {
-                    quickReplyButton: {
-                        displayText: 'Donasi',
-                        id: '.donasi'
-                    }
-                },
-            ]
-        }
-       conn.sendMessage(m.chat, message,m)
-    //conn.reply(m.chat, text.trim(), m)
-    /*return await conn.relayMessage(
+     //conn.reply(m.chat, text.trim(), m)
+    return await conn.relayMessage(
          m.chat,
          template.message,
          { messageId: template.key.id }
-     )*/
+     )
 } catch (e) {
     conn.reply(m.chat, 'Maaf, menu sedang error', m)
     throw e
