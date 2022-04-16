@@ -65,7 +65,7 @@ global.APIKeys = { // APIKey Here
 
 // Sticker WM
 global.stiker_wait = 'Stiker sedang dibuat'
-global.packname = 'By Pilar'
+global.packname = 'ZEUSBOTZ-MD'
 global.author = `By Pilar`
 global.wm = 'ZEUS BOT - MD' 
 global.watermark = wm
