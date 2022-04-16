@@ -69,6 +69,7 @@ global.packname = 'By Pilar'
 global.author = `By Pilar`
 global.wm = 'ZEUS BOT - MD' 
 global.watermark = wm
+global.instagram = 'https://instagram.com/not_pilar32
 global.botdate = `❏ ${wktuh} H  ${wktum} M  ${wktus} S\n❏ ${week} ${date}`
 global.media = 'https://telegra.ph/file/ccb2359d3925fd7af58cd.jpg'
 global.github = 'https://github.com/PilarV2'
