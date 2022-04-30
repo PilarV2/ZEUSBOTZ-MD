@@ -59,9 +59,9 @@ global.APIKeys = { // APIKey Here
   'https://pencarikode.xyz': 'pais', 
   'https://leyscoders-api.herokuapp.com': 'dappakntlll',
   'https://zekais-api.herokuapp.com': 'apikeymu',
-  'https://api.lolhuman.xyz': 'Deffbotz',
+  'https://api.lolhuman.xyz': 'apikey',
 }
-//cari apikey sendiri ya gaes yak
+//Kata apikey ubah jadi apikey lu dengan beli di website nya
 
 // Sticker WM
 global.stiker_wait = 'Stiker sedang dibuat'
