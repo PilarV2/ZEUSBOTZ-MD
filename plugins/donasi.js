@@ -10,14 +10,14 @@ let anu = `*─────� DONATE 」 ───*
 Hai 👋
 Kalian bisa mendukung saya agar bot ini tetap up to date dengan:
 ┌〔 Donasi • Emoney 〕
-├🏧 089625556161 (OVO/Dana/GoPay)
+├🏧 085706735450 (OVO/Dana/GoPay)
 └────
 Berapapun donasi kalian akan sangat berarti 👍
 
 Arigatou!
 
 Contact person Owner:
-wa.me/6289625556161 (Owner)
+wa.me/6285706735450 (Owner)
 
 *donasi via follow github juga boleh*`
      const template = generateWAMessageFromContent(m.chat, proto.Message.fromObject({
