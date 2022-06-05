@@ -446,14 +446,14 @@ const template = generateWAMessageFromContent(m.key.remoteJid, proto.Message.fro
            hydratedButtons: [{
             urlButton: {
                displayText: 'MY WEBSITE',
-               url: 'https://pilarv2.github.io/'
+               url: 'https://VERDIBOTZ1.github.io'
              }
 
            },
              {
               urlButton: {
                displayText: 'CHAT OWNER',
-               PhoneNumber: 'https://wa.me/6289625556161'
+               PhoneNumber: 'https://wa.me/6285706735450'
              }
            },
   
